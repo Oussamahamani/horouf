@@ -210,11 +210,9 @@ function show_kana() {
 	
 	var font = fonts[Math.floor(Math.random()*fonts.length)];
 	
-	if(font == 'default') {
+
 		document.getElementById('kana').innerHTML = cur_kana;
-	} else {
-		document.getElementById('kana').innerHTML = '<img src="fonts/' + font + '/' + cur_kana + '.png" />';
-	}
+
 	document.getElementById('answer').innerHTML = cur_reading;
 	
 	if(show_tools.indexOf(cur_kana) == -1) {
