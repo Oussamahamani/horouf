@@ -171,7 +171,9 @@ ul#tools li a {
 }
 
 #wrong {
+	margin-top: 10px;
 	color:red;
+	text-align: center;
 }
 
 .font_example {
