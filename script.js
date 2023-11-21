@@ -255,7 +255,20 @@ function check_answer() {
 	if(err) {
 		wrong = true;
 
-		document.getElementById('message').innerHTML = '<span id="wrong">' + cur_kana + ' = ' + cur_reading + '</span>';
+		let message = document.getElementById('message')
+		message.innerHTML = '';
+		message.setAttribute('id', 'wrong');
+		
+		var text = document.createElement('p');
+		var text2 = document.createElement('p');
+
+		text.innerText= cur_kana
+		text.style.display = 'inline'; 
+		message.appendChild(text)
+		text2.innerText=   ' = ' + cur_reading
+		text2.style.display = 'inline'; 
+		message.appendChild(text2)
+
 	}
 	
 	if(answer == cur_reading) {
