@@ -186,7 +186,7 @@ function show_kana() {
 		document.getElementById('a').checked = true;
 		save_settings();
 	}
-	
+	console.log('running')
 
 	
 	if(total_answered > 0) {
@@ -256,19 +256,22 @@ function check_answer() {
 		wrong = true;
 
 		let message = document.getElementById('message')
-		message.innerHTML = '';
-		message.setAttribute('id', 'wrong');
-		
+		message.innerHTML = ""
+		var container = document.createElement('div');
+		container.setAttribute('id', 'wrong');
+
 		var text = document.createElement('p');
 		var text2 = document.createElement('p');
 
 		text.innerText= cur_kana
 		text.style.display = 'inline'; 
-		message.appendChild(text)
+		container.appendChild(text)
 		text2.innerText=   ' = ' + cur_reading
 		text2.style.display = 'inline'; 
-		message.appendChild(text2)
+		container.appendChild(text2)
 
+		message.append(container)
+		// document.getElementById('message').innerHTML = '<span id="wrong">' + cur_kana + ' = ' + cur_reading + '</span>';
 	}
 	
 	if(answer == cur_reading) {
@@ -276,6 +279,7 @@ function check_answer() {
 		if( ! wrong) {
 			total_correct += 1;
 		}
+		console.log('new kana')
 		show_kana();
 	}
 }
