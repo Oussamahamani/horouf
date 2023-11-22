@@ -73,6 +73,8 @@ var replacements = {
 	'ju': ['dyu']
 };
 
+
+
 var active = [];
 var shuffled = [];
 var fonts = [];
@@ -369,3 +371,14 @@ onload = function () {
 		}
 	}
 }
+
+
+console.log('ltt')
+const letters = document.querySelectorAll('.kana')
+
+letters.forEach((letter)=>{
+	letter.addEventListener('click',(e)=>{
+let letterAudio = new Audio('./audio/' + e.target.innerText + '.mp3');
+letterAudio.play();
+	})
+})
