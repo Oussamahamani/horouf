@@ -1,6 +1,6 @@
 var kana = {
 	// 'a' : { 'ã‚': 'a', 'ã„': 'i', 'ã†': 'u', 'ãˆ': 'e', 'ãŠ': 'o'},
-        '2': {'أَ': '2a', 'أِ': '2i', 'أُ': '2o'},
+        'a': {'أَ': '2a', 'أِ': '2i', 'أُ': '2o'},
         'b': {'بَ': 'ba', 'بِ': 'bi', 'بُ': 'bo'},
         't': {'تَ': 'ta', 'تِ': 'ti', 'تُ': 'to'},
         'th': {'ثَ': 'tha', 'ثِ': 'thi', 'ثُ': 'tho'},
@@ -16,8 +16,8 @@ var kana = {
         'S': {'صَ': 'Sa', 'صِ': 'Si', 'صُ': 'So'},
         'D': {'ضَ': 'Da', 'ضِ': 'Di', 'ضُ': 'Do'},
         'T': {'طَ': 'Ta', 'طِ': 'Ti', 'طُ': 'To'},
-        'T': {'ظَ': 'Ta', 'ظِ': 'Ti', 'ظُ': 'To'},
-        '3': {'عَ': '3a', 'عِ': '3i', 'عُ': '3o'},
+        'Dh': {'ظَ': 'Dha', 'ظِ': 'Dhi', 'ظُ': 'Dho'},
+        'G': {'عَ': '3a', 'عِ': '3i', 'عُ': '3o'},
         'gh': {'غَ': 'gha', 'غِ': 'ghi', 'غُ': 'gho'},
         'f': {'فَ': 'fa', 'فِ': 'fi', 'فُ': 'fo'},
         'q': {'قَ': 'qa', 'قِ': 'qi', 'قُ': 'qo'},
@@ -31,6 +31,61 @@ var kana = {
 	
 }
 
+const loadTable= ()=>{
+	let container= document.querySelector('.harakat')
+	var checkRow = document.createElement('tr');
+	checkRow.classList.add('checkrow') 
+	checkRow.classList.add('hcheck') 
+
+	let rows = []
+	for(let i =0;i<3;i++){
+		var row = document.createElement('tr');
+		rows.push(row)
+	}
+
+	for (let key in kana){
+		console.log(key)
+		// Create a new table cell
+		var newCell = document.createElement('td');
+	
+		// Create a new checkbox
+		var checkbox = document.createElement('input');
+		checkbox.type = 'checkbox';
+		checkbox.className = 'kanacheck';
+		checkbox.id = key;
+
+		newCell.appendChild(checkbox);
+		checkRow.appendChild(newCell);
+
+		let i =0
+		for(let inKey in kana[key]){
+			// console.log(inKey)
+			
+			const kanaSpan = document.createElement("span");
+			kanaSpan.className = "kana";
+			kanaSpan.textContent = inKey;
+		  
+			const romajiSpan = document.createElement("span");
+			romajiSpan.className = "romaji";
+			romajiSpan.textContent = kana[key][inKey];
+		  
+			// Create the <td> element and append the <span> elements to it
+			const tdElement = document.createElement("td");
+			tdElement.appendChild(kanaSpan);
+			tdElement.appendChild(document.createTextNode(" ")); // Add a space between the spans
+			tdElement.appendChild(romajiSpan);
+			rows[i].appendChild(tdElement)
+			i++
+		}
+	}
+	// console.log(rows[0].children)
+	container.appendChild(checkRow)
+	for(let i =0;i<3;i++){
+		container.appendChild(rows[i])
+	}
+	}
+
+loadTable()
 var show_tools = [ 'أَ', 'أِ', 'أُ',
 'بَ', 'بِ', 'بُ',
 'تَ', 'تِ', 'تُ',
