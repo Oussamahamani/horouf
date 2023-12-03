@@ -30,7 +30,6 @@ var kana = {
         'y': {'يَ': 'ya', 'يِ': 'yi', 'يُ': 'yo'},
 	
 }
-
 const loadTable= ()=>{
 	let container= document.querySelector('.harakat')
 	var checkRow = document.createElement('tr');
@@ -44,7 +43,6 @@ const loadTable= ()=>{
 	}
 
 	for (let key in kana){
-		console.log(key)
 		// Create a new table cell
 		var newCell = document.createElement('td');
 	
@@ -85,7 +83,92 @@ const loadTable= ()=>{
 	}
 	}
 
+const forms = {
+	'-forma': {'Isolated-a': 'ا', 'Initial-a': 'ا', 'Middle-a': 'ـا', 'End-a': 'ـا'},
+    'b-form': {'Isolated-b': 'ب', 'Initial-b': 'بـ', 'Middle-b': 'ـبـ', 'End-b': 'ب'},
+    't-form': {'Isolated-t': 'ت', 'Initial-t': 'تـ', 'Middle-t': 'ـتـ', 'End-t': 'ـت'},
+    'th-form': {'Isolated-th': 'ث', 'Initial-th': 'ثـ', 'Middle-th': 'ثـ', 'End-th': 'ـث'},
+    'j-form': {'Isolated-j': 'ج', 'Initial-j': 'جـ', 'Middle-j': 'ـجـ', 'End-j': 'ـج'},
+    'H-form': {'Isolated-H': 'ح', 'Initial-H': 'حـ', 'Middle-H': 'ـحـ', 'End-H': 'ـح'},
+    'kh-form': {'Isolated-kh': 'خ', 'Initial-kh': 'خـ', 'Middle-kh': 'ـخ', 'End-kh': 'ـخـ'},
+    'd-form': {'Isolated-d': 'د', 'Initial-d': 'د', 'Middle-d': 'ـد', 'End-d': 'ـد'},
+    'dh-form': {'Isolated-dh': 'ذ', 'Initial-dh': 'ذ', 'Middle-dh': 'ـذ', 'End-dh': 'ـذ'},
+    'r-form': {'Isolated-r': 'ر', 'Initial-r': 'ر', 'Middle-r': 'ـر', 'End-r': 'ـر'},
+    'z-form': {'Isolated-z': 'ز', 'Initial-z': 'ـز', 'Middle-z': 'ـز', 'End-z': 'ـز'},
+    's-form': {'Isolated-s': 'س', 'Initial-s': 'سـ', 'Middle-s': 'ـسـ', 'End-s': 'ـس'},
+    'sh-form': {'Isolated-sh': 'ش', 'Initial-sh': 'شـ', 'Middle-sh': 'ـشـ', 'End-sh': 'ـش'},
+    'Saad-form': {'Isolated-S': 'ص', 'Initial-S': 'صـ', 'Middle-S': 'ـصـ', 'End-S': 'ـص'},
+    'Dhad-form': {'Isolated-D': 'ض', 'Initial-D': 'ضـ', 'Middle-D': 'ـضـ', 'End-D': 'ض'},
+    'Taa-form': {'Isolated-T': 'ط', 'Initial-T': 'ط', 'Middle-T': 'ـطـ', 'End-T': 'ـط'},
+    'Dhaa-form': {'Isolated-Dh': 'ظ', 'Initial-Dh': 'ظـ', 'Middle-Dh': 'ـظـ', 'End-Dh': 'ـظ'},
+    'ain-form': {'Isolated-3': 'ع', 'Initial-3': 'عـ', 'Middle-3': 'ـعـ', 'End-3': 'ـع'},
+    'ghain-form': {'Isolated-gh': 'غ', 'Initial-gh': 'غـ', 'Middle-gh': 'ـغـ', 'End-gh': 'ـغ'},
+    'f-form': {'Isolated-f': 'ف', 'Initial-f': 'فـ', 'Middle-f': 'ـفـ', 'End-f': 'ـف'},
+    'q-form': {'Isolated-q': 'ق', 'Initial-q': 'قـ', 'Middle-q': 'ـقـ', 'End-q': 'ق'},
+    'k-form': {'Isolated-k': 'ك', 'Initial-k': 'كـ', 'Middle-k': 'ـكـ', 'End-k': 'ـك'},
+    'l-form': {'Isolated-l': 'ل', 'Initial-l': 'لـ', 'Middle-l': 'ـلـ', 'End-l': 'لـ'},
+    'm-form': {'Isolated-m': 'م', 'Initial-m': 'مـ', 'Middle-m': 'ـمـ', 'End-m': 'ـم'},
+    'n-form': {'Isolated-n': 'ن', 'Initial-n': 'نـ', 'Middle-n': 'ـنـ', 'End-n': 'ـن'},
+    'h-form': {'Isolated-h': 'ه', 'Initial-h': 'هـ', 'Middle-h': 'ـهـ', 'End-h': 'ـه'},
+    'w-form': {'Isolated-w': 'و', 'Initial-w': 'و', 'Middle-w': 'ـو', 'End-w': 'ـو'},
+    'y-form': {'Isolated-y': 'ي', 'Initial-y': 'يـ', 'Middle-y': 'ـيـ', 'End-y': 'ـي'}
+}
+
+
+const loadTableForms= ()=>{
+	let container= document.querySelector('.table-forms')
+	var checkRow = document.createElement('tr'); 
+
+	let rows = []
+	for(let i =0;i<4;i++){
+		var row = document.createElement('tr');
+		rows.push(row)
+	}
+	for (let key in forms){
+		// Create a new table cell
+		var newCell = document.createElement('td');
+	
+		// Create a new checkbox
+		var checkbox = document.createElement('input');
+		checkbox.type = 'checkbox';
+		checkbox.className = 'kanacheck';
+		checkbox.id = key;
+
+		newCell.appendChild(checkbox);
+		checkRow.appendChild(newCell);
+
+		let i =0
+		for(let inKey in forms[key]){
+			if(inKey){
+
+				
+				const kanaSpan = document.createElement("span");
+				kanaSpan.className = "kana";
+				kanaSpan.textContent = forms[key][inKey]
+				
+				const romajiSpan = document.createElement("span");
+				romajiSpan.className = "romaji";
+				romajiSpan.textContent = inKey.split('-')[1];
+				// Create the <td> element and append the <span> elements to it
+				const tdElement = document.createElement("td");
+				tdElement.appendChild(kanaSpan);
+				tdElement.appendChild(document.createTextNode(" ")); // Add a space between the spans
+				tdElement.appendChild(romajiSpan);
+				rows[i].appendChild(tdElement)
+			}
+			i++
+		}
+	}
+	// console.log(rows[0].children)
+	container.appendChild(checkRow)
+	for(let i =0;i<4;i++){
+		container.appendChild(rows[i])
+	}
+	}
+loadTableForms()
 loadTable()
+
+kana ={...kana,...forms}
 var show_tools = [ 'أَ', 'أِ', 'أُ',
 'بَ', 'بِ', 'بُ',
 'تَ', 'تِ', 'تُ',
@@ -259,9 +342,13 @@ function show_kana() {
 		shuffled.shift();
 	}
 	
-    console.log(shuffled)
+    console.log(shuffled[0])
 	cur_kana = shuffled[0][0];
 	cur_reading = shuffled[0][1];
+	if(cur_kana.includes('-')){
+		cur_kana = shuffled[0][1];
+		cur_reading = shuffled[0][0].split('-')[1];
+	}
 	
 	shuffled.shift();
 	
