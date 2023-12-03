@@ -84,6 +84,7 @@ const loadTable= ()=>{
 	}
 
 const forms = {
+	'instruction': {'Isolated': 'ا', 'initial': "", 'medial': '', 'end': 'ا'},
 	'-forma': {'Isolated-a': 'ا', 'Initial-a': 'ا', 'Middle-a': 'ـا', 'End-a': 'ـا'},
     'b-form': {'Isolated-b': 'ب', 'Initial-b': 'بـ', 'Middle-b': 'ـبـ', 'End-b': 'ب'},
     't-form': {'Isolated-t': 'ت', 'Initial-t': 'تـ', 'Middle-t': 'ـتـ', 'End-t': 'ـت'},
@@ -118,23 +119,26 @@ const forms = {
 const loadTableForms= ()=>{
 	let container= document.querySelector('.table-forms')
 	var checkRow = document.createElement('tr'); 
-
+	
 	let rows = []
 	for(let i =0;i<4;i++){
 		var row = document.createElement('tr');
 		rows.push(row)
 	}
 	for (let key in forms){
-		// Create a new table cell
 		var newCell = document.createElement('td');
+		
+		// Create a new table cell
 	
 		// Create a new checkbox
 		var checkbox = document.createElement('input');
 		checkbox.type = 'checkbox';
 		checkbox.className = 'kanacheck';
 		checkbox.id = key;
-
-		newCell.appendChild(checkbox);
+		if(key!=="instruction"){
+		
+			newCell.appendChild(checkbox);
+		}
 		checkRow.appendChild(newCell);
 
 		let i =0
@@ -143,12 +147,16 @@ const loadTableForms= ()=>{
 
 				
 				const kanaSpan = document.createElement("span");
-				kanaSpan.className = "kana";
-				kanaSpan.textContent = forms[key][inKey]
-				
 				const romajiSpan = document.createElement("span");
+				kanaSpan.className = "kana";
 				romajiSpan.className = "romaji";
+				kanaSpan.textContent = forms[key][inKey]
 				romajiSpan.textContent = inKey.split('-')[1];
+				if(key==="instruction"){
+					kanaSpan.textContent = ""
+					romajiSpan.textContent = inKey;
+					romajiSpan.classList.add('rotate')
+				}
 				// Create the <td> element and append the <span> elements to it
 				const tdElement = document.createElement("td");
 				tdElement.appendChild(kanaSpan);
@@ -450,6 +458,7 @@ function hide_answer() {
 
 function play_sound() {
     let fineName
+	console.log(cur_reading)
     for (const property in kana) {
    
         for (let key of Object.keys(kana[property])){
@@ -459,7 +468,20 @@ function play_sound() {
             }
         }
           }
-    console.log(cur_reading)
+
+		  if(!fineName){
+			for (const property in kana) {
+   
+				for (let key of Object.keys(kana[property])){
+					// console.log("Isolated-"+cur_reading )
+					if(key ==="Isolated-"+cur_reading ){
+						fineName = kana[property][key] +'َ'
+						// console.log(kana[property][key])
+					}
+				}
+				  }
+		  }
+		  console.log(fineName)
 	var audio = new Audio('./audio/' + fineName + '.mp3');
 	audio.play();
 	document.getElementById('input_box').focus();
