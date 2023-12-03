@@ -86,12 +86,12 @@ const loadTable= ()=>{
 const forms = {
 	'instruction': {'Isolated': 'ا', 'initial': "", 'medial': '', 'end': 'ا'},
 	'-forma': {'Isolated-a': 'ا', 'Initial-a': 'ا', 'Middle-a': 'ـا', 'End-a': 'ـا'},
-    'b-form': {'Isolated-b': 'ب', 'Initial-b': 'بـ', 'Middle-b': 'ـبـ', 'End-b': 'ب'},
+    'b-form': {'Isolated-b': 'ب', 'Initial-b': 'بـ', 'Middle-b': 'ـبـ', 'End-b': 'ـب'},
     't-form': {'Isolated-t': 'ت', 'Initial-t': 'تـ', 'Middle-t': 'ـتـ', 'End-t': 'ـت'},
     'th-form': {'Isolated-th': 'ث', 'Initial-th': 'ثـ', 'Middle-th': 'ثـ', 'End-th': 'ـث'},
     'j-form': {'Isolated-j': 'ج', 'Initial-j': 'جـ', 'Middle-j': 'ـجـ', 'End-j': 'ـج'},
     'H-form': {'Isolated-H': 'ح', 'Initial-H': 'حـ', 'Middle-H': 'ـحـ', 'End-H': 'ـح'},
-    'kh-form': {'Isolated-kh': 'خ', 'Initial-kh': 'خـ', 'Middle-kh': 'ـخ', 'End-kh': 'ـخـ'},
+    'kh-form': {'Isolated-kh': 'خ', 'Initial-kh': 'خـ', 'Middle-kh': 'ـخـ', 'End-kh': 'ـخ'},
     'd-form': {'Isolated-d': 'د', 'Initial-d': 'د', 'Middle-d': 'ـد', 'End-d': 'ـد'},
     'dh-form': {'Isolated-dh': 'ذ', 'Initial-dh': 'ذ', 'Middle-dh': 'ـذ', 'End-dh': 'ـذ'},
     'r-form': {'Isolated-r': 'ر', 'Initial-r': 'ر', 'Middle-r': 'ـر', 'End-r': 'ـر'},
@@ -100,14 +100,14 @@ const forms = {
     'sh-form': {'Isolated-sh': 'ش', 'Initial-sh': 'شـ', 'Middle-sh': 'ـشـ', 'End-sh': 'ـش'},
     'Saad-form': {'Isolated-S': 'ص', 'Initial-S': 'صـ', 'Middle-S': 'ـصـ', 'End-S': 'ـص'},
     'Dhad-form': {'Isolated-D': 'ض', 'Initial-D': 'ضـ', 'Middle-D': 'ـضـ', 'End-D': 'ض'},
-    'Taa-form': {'Isolated-T': 'ط', 'Initial-T': 'ط', 'Middle-T': 'ـطـ', 'End-T': 'ـط'},
+    'Taa-form': {'Isolated-T': 'ط', 'Initial-T': 'ط', 'Middle-T': 'ـطـ', 'End-T': "ـط"},
     'Dhaa-form': {'Isolated-Dh': 'ظ', 'Initial-Dh': 'ظـ', 'Middle-Dh': 'ـظـ', 'End-Dh': 'ـظ'},
     'ain-form': {'Isolated-3': 'ع', 'Initial-3': 'عـ', 'Middle-3': 'ـعـ', 'End-3': 'ـع'},
     'ghain-form': {'Isolated-gh': 'غ', 'Initial-gh': 'غـ', 'Middle-gh': 'ـغـ', 'End-gh': 'ـغ'},
     'f-form': {'Isolated-f': 'ف', 'Initial-f': 'فـ', 'Middle-f': 'ـفـ', 'End-f': 'ـف'},
-    'q-form': {'Isolated-q': 'ق', 'Initial-q': 'قـ', 'Middle-q': 'ـقـ', 'End-q': 'ق'},
+    'q-form': {'Isolated-q': 'ق', 'Initial-q': 'قـ', 'Middle-q': 'ـقـ', 'End-q': "ـق"},
     'k-form': {'Isolated-k': 'ك', 'Initial-k': 'كـ', 'Middle-k': 'ـكـ', 'End-k': 'ـك'},
-    'l-form': {'Isolated-l': 'ل', 'Initial-l': 'لـ', 'Middle-l': 'ـلـ', 'End-l': 'لـ'},
+    'l-form': {'Isolated-l': 'ل', 'Initial-l': 'لـ', 'Middle-l': 'ـلـ', 'End-l': "ـل"},
     'm-form': {'Isolated-m': 'م', 'Initial-m': 'مـ', 'Middle-m': 'ـمـ', 'End-m': 'ـم'},
     'n-form': {'Isolated-n': 'ن', 'Initial-n': 'نـ', 'Middle-n': 'ـنـ', 'End-n': 'ـن'},
     'h-form': {'Isolated-h': 'ه', 'Initial-h': 'هـ', 'Middle-h': 'ـهـ', 'End-h': 'ـه'},
@@ -117,14 +117,18 @@ const forms = {
 
 
 const loadTableForms= ()=>{
+
+	
 	let container= document.querySelector('.table-forms')
 	var checkRow = document.createElement('tr'); 
+	checkRow.classList.add('hccheck') 
 	
 	let rows = []
 	for(let i =0;i<4;i++){
 		var row = document.createElement('tr');
 		rows.push(row)
 	}
+
 	for (let key in forms){
 		var newCell = document.createElement('td');
 		
@@ -264,8 +268,11 @@ function check(set) {
 	for (i = 0; i < trs.length; i++) {
 		var tds = trs[i].children;
 		for (x = 0; x < tds.length; x++) {
-			if(tds[x].children[0].id != 'KOI-WIN') {
-				tds[x].children[0].checked = true;
+			if(tds[x].children[0]){
+
+				if(tds[x].children[0].id != 'KOI-WIN') {
+					tds[x].children[0].checked = true;
+				}
 			}
 		}
 	}
@@ -277,7 +284,10 @@ function uncheck(set) {
 	for (i = 0; i < trs.length; i++) {
 		var tds = trs[i].children;
 		for (x = 0; x < tds.length; x++) {
-			tds[x].children[0].checked = false;
+			if(tds[x].children[0]){
+
+				tds[x].children[0].checked = false;
+			}
 		}
 	}
 	save_settings();
