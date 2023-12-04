@@ -1,3 +1,4 @@
+let chosenHarakat= []
 var kana = {
 	// 'a' : { 'ã‚': 'a', 'ã„': 'i', 'ã†': 'u', 'ãˆ': 'e', 'ãŠ': 'o'},
         'a': {'أَ': '2a', 'أِ': '2i', 'أُ': '2o'},
@@ -309,7 +310,11 @@ function shuffle(orig_array) {
 
 	return array;
 }
-
+let harakatGuide={
+	"َ":"a",
+	"ِ":"i",
+	"ُ":"o"
+}
 function collect() {
 	kanacheck = document.getElementsByClassName('kanacheck');
     console.log("🚀 ~ file: script.js:1T7 ~ collect ~ kanacheck:", kanacheck)
@@ -363,9 +368,23 @@ function show_kana() {
     console.log(shuffled[0])
 	cur_kana = shuffled[0][0];
 	cur_reading = shuffled[0][1];
+
+	console.log(chosenHarakat)
+
 	if(cur_kana.includes('-')){
-		cur_kana = shuffled[0][1];
-		cur_reading = shuffled[0][0].split('-')[1];
+		let randomHaraka = ""
+		if(chosenHarakat.length>0){
+
+			let randomInt = Math.floor(Math.random() * chosenHarakat.length);
+			 randomHaraka = chosenHarakat[randomInt]
+		}
+		let harakaRoman = harakatGuide[randomHaraka] || ""
+
+		cur_kana =  randomHaraka+ shuffled[0][1];
+		cur_reading =  shuffled[0][0].split('-')[1]+harakaRoman;
+		console.log("🚀 ~ file: script.js:384 ~ show_kana ~ cur_reading:", cur_reading)
+		// console.log( randomHaraka+ shuffled[0][1], shuffled[0][0].split('-')[1]+harakatGuide[randomHaraka])
+		// console.log(cur_kana,cur_reading)
 	}
 	
 	shuffled.shift();
@@ -556,3 +575,28 @@ let letterAudio = new Audio('./audio/' + e.target.innerText + '.mp3');
 letterAudio.play();
 	})
 })
+
+
+const addHarakat= ()=>{
+	let inputs = document.querySelectorAll('.haraka-form')
+	
+	inputs.forEach((input)=>{
+if( input.checked){
+	chosenHarakat.push(input.name)
+}
+		input.addEventListener('input', function(e) {
+			// Your function logic here
+			console.log('Input changed:', e.target.checked);
+			
+				if( e.target.checked){
+					chosenHarakat.push(e.target.name)
+				}else{
+					chosenHarakat=chosenHarakat.filter((item)=> item !==e.target.name )
+				}
+
+				console.log(chosenHarakat)
+		  });
+	})
+}
+
+addHarakat()
