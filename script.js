@@ -1,4 +1,10 @@
 let chosenHarakat= []
+let wrongSpeak = false
+let correctSpeak = false
+
+
+
+
 var kana = {
 	// 'a' : { 'ã‚': 'a', 'ã„': 'i', 'ã†': 'u', 'ãˆ': 'e', 'ãŠ': 'o'},
         'a': {'أَ': '2a', 'أِ': '2i', 'أُ': '2o'},
@@ -454,10 +460,20 @@ function check_answer() {
 		message.append(container)
 		// document.getElementById('message').innerHTML = '<span id="wrong">' + cur_kana + ' = ' + cur_reading + '</span>';
 	}
-	
+	let spokeYet = true 
 	if(answer == cur_reading) {
 		total_answered += 1;
+
+		if( document.querySelector('.wrong').checked &&spokeYet &&wrong){
+			console.log(correctSpeak)
+			spokeYet=false
+			play_sound() 
+		}
 		if( ! wrong) {
+			if( document.querySelector('.correct').checked &&spokeYet){
+				spokeYet=false
+				play_sound() 
+			}
 			total_correct += 1;
 		}
 		console.log('new kana')
@@ -600,3 +616,26 @@ if( input.checked){
 }
 
 addHarakat()
+
+let correctInput = document.querySelector('.correct').checked
+console.log('')
+correctSpeak = correctInput.checked
+correctInput.addEventListener('input', function(e) {
+	if( e.target.checked){
+		correctSpeak = true
+	}else{
+		correctSpeak = false
+		console.log('fffffff')
+	}
+})
+let wrongInput = document.querySelector('.wrong')
+wrongInput = wrongInput.checked
+
+
+wrongInput.addEventListener('input', function(e) {
+	if( e.target.checked){
+		wrongSpeak = true
+	}else{
+		wrongSpeak = false
+	}
+})
