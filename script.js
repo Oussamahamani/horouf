@@ -404,7 +404,7 @@ function show_kana() {
 }
 
 function check_answer() {
-	answer = document.getElementById('input_box').value.toLowerCase();
+	answer = document.getElementById('input_box').value;
 	if(! answer) {
 		answer = 'x';
 	}
