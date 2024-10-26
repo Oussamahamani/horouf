@@ -639,3 +639,12 @@ wrongInput.addEventListener('input', function(e) {
 		wrongSpeak = false
 	}
 })
+
+
+let twoletters = [
+
+	"كتب",
+	"نهر",
+	"جَمَل",
+	"رَجُل",
+]
